@@ -45,7 +45,6 @@ const Card = ({
         hover:shadow-md
       "
     >
-      {/* Icon + Badge */}
       <div className="flex items-start justify-between">
         <div className="flex h-9 w-9 items-center justify-center text-2xl">
           {icon}
@@ -60,17 +59,17 @@ const Card = ({
         )}
       </div>
 
-      {/* Name */}
+   
       <h3 className="mt-3 text-sm font-semibold text-slate-800">
         {name}
       </h3>
 
-      {/* Description */}
+     
       <p className="mt-1 flex-1 text-[10px] leading-4 text-slate-400">
         {description}
       </p>
 
-      {/* Information */}
+     
       <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2">
         <span className="rounded bg-slate-50 px-2 py-1 text-[9px] text-slate-500">
           {category}
@@ -86,7 +85,7 @@ const Card = ({
         </span>
       </div>
 
-      {/* Button */}
+    
      <button
   type="button"
   onClick={onAdd}
