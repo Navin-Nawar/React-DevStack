@@ -37,55 +37,20 @@ const Footer: React.FC = () => {
     <footer className="mt-auto border-t border-slate-100 bg-white">
       <div className="mx-auto max-w-6xl px-6">
 
-        {/* =====================================
-            FOOTER MAIN
-        ===================================== */}
+       
 
         <div className="grid grid-cols-1 gap-10 py-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-16">
 
-          {/* ===================================
-              BRAND
-          =================================== */}
+         
 
           <div className="max-w-sm">
             <img src={Footerpic} alt="" />
-            {/* <a
-              href="#"
-              className="inline-flex items-center gap-2"
-            >
-              <span
-                className="
-                  flex
-                  h-5
-                  w-5
-                  items-center
-                  justify-center
-                  rounded-[5px]
-                  bg-gradient-to-br
-                  from-purple-500
-                  to-pink-500
-                  text-[7px]
-                  font-bold
-                  text-white
-                "
-              >
-                DS
-              </span>
-
-              <span className="text-sm font-bold text-slate-800">
-                Dev{" "}
-                <span className="text-pink-500">
-                  Stack
-                </span>
-              </span>
-            </a> */}
 
             <p className="mt-3 max-w-[280px] text-[10px] leading-5 text-slate-400">
               Curated tools, technologies, and resources
               for developers building modern software.
             </p>
 
-            {/* Social links */}
 
             <div className="mt-4 flex items-center gap-4">
               <a
@@ -111,9 +76,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* ===================================
-              PRODUCT
-          =================================== */}
 
           <FooterColumn
             title="Product"
@@ -124,9 +86,6 @@ const Footer: React.FC = () => {
             ]}
           />
 
-          {/* ===================================
-              COMPANY
-          =================================== */}
 
           <FooterColumn
             title="Company"
@@ -137,9 +96,6 @@ const Footer: React.FC = () => {
             ]}
           />
 
-          {/* ===================================
-              LEGAL
-          =================================== */}
 
           <FooterColumn
             title="Legal"
@@ -150,9 +106,7 @@ const Footer: React.FC = () => {
           />
         </div>
 
-        {/* =====================================
-            FOOTER BOTTOM
-        ===================================== */}
+      
 
         <div
           className="
