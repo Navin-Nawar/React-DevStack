@@ -1,4 +1,5 @@
 1.Project Name:React-DevStack
+
 2.Description:Dev Stack is a responsive React application that helps developers explore different technologies and build their own personalized development stack. Users can browse technologies, view their details, and add or remove technologies from their stack.
 
 3.Technology Used:React,TypeScript,vite,Tailwind CSS,React Toastify,JSON,React Hooks
