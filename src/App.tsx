@@ -19,15 +19,10 @@ import DockerCard from "./components/cards/DockerCard";
 import Footer from "./components/Footer";
 
 function App() {
-  // ==========================================
-  // STACK STATE
-  // ==========================================
+
 
   const [stack, setStack] = useState<string[]>([]);
 
-  // ==========================================
-  // ADD TECHNOLOGY
-  // ==========================================
 
   const addToStack = (technology: string) => {
     setStack((previousStack) => {
@@ -39,9 +34,7 @@ function App() {
     });
   };
 
-  // ==========================================
-  // REMOVE ONE TECHNOLOGY
-  // ==========================================
+ 
 
   const removeFromStack = (technology: string) => {
     setStack((previousStack) =>
@@ -49,17 +42,12 @@ function App() {
     );
   };
 
-  // ==========================================
-  // REMOVE ALL TECHNOLOGIES
-  // ==========================================
 
   const removeAll = () => {
     setStack([]);
   };
 
-  // ==========================================
-  // CHECK IF TECHNOLOGY IS ADDED
-  // ==========================================
+ 
 
   const isAdded = (technology: string) => {
     return stack.includes(technology);
@@ -67,28 +55,19 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* ========================================
-          NAVBAR
-      ======================================== */}
+    
 
       <Navbar />
 
-      {/* ========================================
-          HERO
-      ======================================== */}
 
       <Hero />
 
-      {/* ========================================
-          MAIN CONTENT
-      ======================================== */}
+    
 
       <main>
         <section className="px-6 py-12 lg:py-16">
           <div className="mx-auto max-w-6xl">
-            {/* ====================================
-                SECTION HEADER
-            ==================================== */}
+           
 
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-slate-900">
@@ -104,9 +83,7 @@ function App() {
               </p>
             </div>
 
-            {/* ====================================
-                TECHNOLOGY AREA
-            ==================================== */}
+           
 
             <div
               className="
@@ -117,10 +94,7 @@ function App() {
                 lg:items-start
               "
             >
-              {/* ==================================
-                  TECHNOLOGY CARDS
-              ================================== */}
-
+             
               <div
                 className="
                   grid
@@ -130,10 +104,7 @@ function App() {
                   lg:grid-cols-3
                 "
               >
-                {/* =================================
-                    REACT
-                ================================= */}
-
+               
                 <div
                   className={
                     isAdded("React")
@@ -147,9 +118,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    VUE
-                ================================= */}
+              
 
                 <div
                   className={
@@ -164,9 +133,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    SVELTE
-                ================================= */}
+               
 
                 <div
                   className={
@@ -181,9 +148,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    NEXT.JS
-                ================================= */}
+               
 
                 <div
                   className={
@@ -198,9 +163,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    NODE.JS
-                ================================= */}
+               
 
                 <div
                   className={
@@ -215,9 +178,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    POSTGRESQL
-                ================================= */}
+               
 
                 <div
                   className={
@@ -232,9 +193,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    REDIS
-                ================================= */}
+               
 
                 <div
                   className={
@@ -249,10 +208,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    JAVASCRIPT
-                ================================= */}
-
+               
                 <div
                   className={
                     isAdded("JavaScript")
@@ -266,9 +222,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    TYPESCRIPT
-                ================================= */}
+               
 
                 <div
                   className={
@@ -283,10 +237,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    JAVA
-                ================================= */}
-
+                
                 <div
                   className={
                     isAdded("Java")
@@ -300,9 +251,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    TAILWIND CSS
-                ================================= */}
+               
 
                 <div
                   className={
@@ -317,10 +266,7 @@ function App() {
                   />
                 </div>
 
-                {/* =================================
-                    DOCKER
-                ================================= */}
-
+               
                 <div
                   className={
                     isAdded("Docker")
@@ -335,9 +281,7 @@ function App() {
                 </div>
               </div>
 
-              {/* ==================================
-                  YOUR STACK
-              ================================== */}
+              
 
               <aside
                 className="
@@ -355,9 +299,7 @@ function App() {
                   lg:block
                 "
               >
-                {/* ==================================
-                    STACK HEADER
-                ================================== */}
+               
 
                 <div className="flex items-start justify-between">
                   <div>
@@ -376,7 +318,7 @@ function App() {
                     </p>
                   </div>
 
-                  {/* COUNT */}
+                
 
                   <span
                     className="
@@ -396,9 +338,7 @@ function App() {
                   </span>
                 </div>
 
-                {/* ==================================
-                    EMPTY STACK
-                ================================== */}
+               
 
                 {stack.length === 0 && (
                   <div
@@ -426,9 +366,7 @@ function App() {
                   </div>
                 )}
 
-                {/* ==================================
-                    SELECTED TECHNOLOGIES
-                ================================== */}
+               
 
                 {stack.length > 0 && (
                   <div className="mt-5">
@@ -487,7 +425,6 @@ function App() {
                             </span>
                           </div>
 
-                          {/* REMOVE */}
 
                           <button
                             type="button"
@@ -515,7 +452,7 @@ function App() {
                       ))}
                     </div>
 
-                    {/* REMOVE ALL */}
+                  
 
                     <button
                       type="button"
@@ -547,10 +484,7 @@ function App() {
         </section>
       </main>
 
-      {/* ========================================
-          FOOTER
-      ======================================== */}
-
+   
       <Footer />
     </div>
   );
