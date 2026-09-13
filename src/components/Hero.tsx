@@ -6,7 +6,6 @@ const Hero = () => {
 
       <div className="mx-auto flex  items-center justify-between  px-8 py-8">
 
-        {/* Left Content */}
         <div>
 
          <h1 className="text-[38px] font-extrabold leading-[1.05] tracking-[-1.5px] text-[#111827]">
@@ -28,7 +27,6 @@ const Hero = () => {
             fits your next project.
           </p>
 
-          {/* Buttons */}
           <div className="mt-5 flex items-center gap-2">
 
             <a
@@ -48,7 +46,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right Illustration */}
         <img src={HeroPic} alt="" />
 
       </div>
