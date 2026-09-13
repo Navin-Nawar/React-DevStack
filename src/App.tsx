@@ -1,73 +1,79 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 
-import ReactCard from "./components/cards/ReactCard";
-import VueCard from "./components/cards/VueCard";
-import SvelteCard from "./components/cards/SvelteCard";
-import NextCard from "./components/cards/NextCard";
-import NodeCard from "./components/cards/NodeCard";
-import PostgreSQLCard from "./components/cards/PostgreSQLCard";
-import RedisCard from "./components/cards/RedisCard";
-import JavaScriptCard from "./components/cards/JavaScriptCard";
-import TypeScriptCard from "./components/cards/TypeScriptCard";
-import JavaCard from "./components/cards/JavaCard";
-import TailwindCard from "./components/cards/TailwindCard";
-import DockerCard from "./components/cards/DockerCard";
-
 import Footer from "./components/Footer";
+import type { Technology } from "./types/technology";
+import Card from "./components/Cards/Card";
 
 function App() {
+  const [technologies, setTechnologies] = useState<Technology[]>([]);
+  const [stack, setStack] = useState<Technology[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setTechnologies(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("Failed to load technologies");
+        setLoading(false);
+      });
+  }, []);
 
-  const [stack, setStack] = useState<string[]>([]);
+  const addToStack = (technology: Technology) => {
+    if (stack.some((item) => item.id === technology.id)) {
+      toast.warning(`${technology.name} is already in your stack`);
+      return;
+    }
 
+    setStack((previousStack) => [...previousStack, technology]);
 
-  const addToStack = (technology: string) => {
-    setStack((previousStack) => {
-      if (previousStack.includes(technology)) {
-        return previousStack;
-      }
-
-      return [...previousStack, technology];
-    });
+    toast.success(`${technology.name} added to stack`);
   };
 
- 
+  const removeFromStack = (id: string) => {
+    const technology = stack.find((item) => item.id === id);
 
-  const removeFromStack = (technology: string) => {
     setStack((previousStack) =>
-      previousStack.filter((item) => item !== technology)
+      previousStack.filter((item) => item.id !== id)
     );
-  };
 
+    if (technology) {
+      toast.info(`${technology.name} removed`);
+    }
+  };
 
   const removeAll = () => {
+    if (stack.length === 0) return;
+
     setStack([]);
+    toast.info("All technologies removed");
   };
 
- 
-
-  const isAdded = (technology: string) => {
-    return stack.includes(technology);
+  const isAdded = (id: string) => {
+    return stack.some((item) => item.id === id);
   };
 
   return (
     <div className="min-h-screen bg-white">
-    
 
       <Navbar />
 
-
       <Hero />
 
-    
-
       <main>
-        <section className="px-6 py-12 lg:py-16">
+        <section
+          id="technologies"
+          className="px-6 py-12 lg:py-16"
+        >
           <div className="mx-auto max-w-6xl">
-           
 
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-slate-900">
@@ -78,414 +84,154 @@ function App() {
               </h2>
 
               <p className="mt-1 text-sm text-slate-400">
-                Pick one technology per category to build
-                your ideal stack.
+                Pick technologies to build your ideal stack.
               </p>
             </div>
 
-           
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                gap-6
-                lg:grid-cols-[minmax(0,1fr)_280px]
-                lg:items-start
-              "
-            >
-             
-              <div
-                className="
-                  grid
-                  grid-cols-1
-                  gap-4
-                  sm:grid-cols-2
-                  lg:grid-cols-3
-                "
-              >
-               
-                <div
-                  className={
-                    isAdded("React")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <ReactCard
-                    isAdded={isAdded("React")}
-                    onAdd={() => addToStack("React")}
-                  />
-                </div>
-
-              
-
-                <div
-                  className={
-                    isAdded("Vue.js")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <VueCard
-                    isAdded={isAdded("Vue.js")}
-                    onAdd={() => addToStack("Vue.js")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("Svelte")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <SvelteCard
-                    isAdded={isAdded("Svelte")}
-                    onAdd={() => addToStack("Svelte")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("Next.js")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <NextCard
-                    isAdded={isAdded("Next.js")}
-                    onAdd={() => addToStack("Next.js")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("Node.js")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <NodeCard
-                    isAdded={isAdded("Node.js")}
-                    onAdd={() => addToStack("Node.js")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("PostgreSQL")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <PostgreSQLCard
-                    isAdded={isAdded("PostgreSQL")}
-                    onAdd={() => addToStack("PostgreSQL")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("Redis")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <RedisCard
-                    isAdded={isAdded("Redis")}
-                    onAdd={() => addToStack("Redis")}
-                  />
-                </div>
-
-               
-                <div
-                  className={
-                    isAdded("JavaScript")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <JavaScriptCard
-                    isAdded={isAdded("JavaScript")}
-                    onAdd={() => addToStack("JavaScript")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("TypeScript")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <TypeScriptCard
-                    isAdded={isAdded("TypeScript")}
-                    onAdd={() => addToStack("TypeScript")}
-                  />
-                </div>
-
-                
-                <div
-                  className={
-                    isAdded("Java")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <JavaCard
-                    isAdded={isAdded("Java")}
-                    onAdd={() => addToStack("Java")}
-                  />
-                </div>
-
-               
-
-                <div
-                  className={
-                    isAdded("Tailwind CSS")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <TailwindCard
-                    isAdded={isAdded("Tailwind CSS")}
-                    onAdd={() => addToStack("Tailwind CSS")}
-                  />
-                </div>
-
-               
-                <div
-                  className={
-                    isAdded("Docker")
-                      ? "rounded-xl border-2 border-pink-400 bg-pink-50/30"
-                      : "rounded-xl"
-                  }
-                >
-                  <DockerCard
-                    isAdded={isAdded("Docker")}
-                    onAdd={() => addToStack("Docker")}
-                  />
-                </div>
+            {loading ? (
+              <div className="flex justify-center py-20">
+                <span className="loading loading-spinner loading-lg text-pink-500"></span>
               </div>
+            ) : (
 
-              
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
 
-              <aside
-                className="
-                  hidden
-                  w-[280px]
-                  self-start
-                  rounded-xl
-                  border
-                  border-slate-100
-                  bg-white
-                  p-5
-                  shadow-lg
-                  lg:sticky
-                  lg:top-6
-                  lg:block
-                "
-              >
-               
+                {/* TECHNOLOGY GRID */}
 
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h2 className="text-sm font-semibold text-slate-800">
-                      Your Stack
-                    </h2>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
-                    <p className="mt-1 text-[10px] text-slate-400">
-                      {stack.length === 0
-                        ? "No technologies selected yet."
-                        : `${stack.length} ${
-                            stack.length === 1
-                              ? "technology"
-                              : "technologies"
-                          } selected.`}
-                    </p>
-                  </div>
+                  {technologies.map((technology) => (
+                    <Card
+                      key={technology.id}
+                      technology={technology}
+                      isAdded={isAdded(technology.id)}
+                      onAdd={() => addToStack(technology)}
+                    />
+                  ))}
 
-                
-
-                  <span
-                    className="
-                      flex
-                      h-7
-                      w-7
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-pink-50
-                      text-xs
-                      font-semibold
-                      text-pink-500
-                    "
-                  >
-                    {stack.length}
-                  </span>
                 </div>
 
-               
 
-                {stack.length === 0 && (
-                  <div
-                    className="
-                      mt-5
-                      flex
-                      h-24
-                      items-center
-                      justify-center
-                      rounded-lg
-                      border
-                      border-dashed
-                      border-slate-200
-                    "
-                  >
-                    <div className="text-center">
-                      <p className="text-xs text-slate-300">
-                        Your stack is empty.
-                      </p>
+                {/* YOUR STACK */}
 
-                      <p className="mt-1 text-[9px] text-slate-300">
-                        Add technologies from the list.
+                <aside className="h-fit rounded-xl border border-slate-100 bg-white p-5 shadow-lg lg:sticky lg:top-6">
+
+                  <div className="flex items-start justify-between">
+
+                    <div>
+                      <h2 className="text-sm font-semibold text-slate-800">
+                        Your Stack
+                      </h2>
+
+                      <p className="mt-1 text-[10px] text-slate-400">
+                        {stack.length === 0
+                          ? "No technologies selected yet."
+                          : `${stack.length} ${
+                              stack.length === 1
+                                ? "technology"
+                                : "technologies"
+                            } selected.`}
                       </p>
                     </div>
+
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pink-50 text-xs font-semibold text-pink-500">
+                      {stack.length}
+                    </span>
+
                   </div>
-                )}
 
-               
 
-                {stack.length > 0 && (
-                  <div className="mt-5">
-                    <div
-                      className="
-                        flex
-                        max-h-[calc(100vh-230px)]
-                        flex-col
-                        gap-2
-                        overflow-y-auto
-                        pr-1
-                      "
-                    >
-                      {stack.map((technology) => (
-                        <div
-                          key={technology}
-                          className="
-                            flex
-                            shrink-0
-                            items-center
-                            justify-between
-                            rounded-lg
-                            border
-                            border-slate-100
-                            bg-slate-50
-                            px-3
-                            py-3
-                            transition
-                            hover:border-pink-100
-                          "
-                        >
-                          {/* TECHNOLOGY */}
+                  {/* EMPTY */}
 
-                          <div className="flex items-center gap-2">
-                            <div
-                              className="
-                                flex
-                                h-7
-                                w-7
-                                shrink-0
-                                items-center
-                                justify-center
-                                rounded-md
-                                bg-white
-                                text-xs
-                                font-bold
-                                text-slate-600
-                                shadow-sm
-                              "
-                            >
-                              {technology.charAt(0)}
+                  {stack.length === 0 && (
+                    <div className="mt-5 flex h-24 items-center justify-center rounded-lg border border-dashed border-slate-200">
+
+                      <div className="text-center">
+                        <p className="text-xs text-slate-300">
+                          Your stack is empty.
+                        </p>
+
+                        <p className="mt-1 text-[9px] text-slate-300">
+                          Add technologies from the list.
+                        </p>
+                      </div>
+
+                    </div>
+                  )}
+
+
+                  {/* SELECTED ITEMS */}
+
+                  {stack.length > 0 && (
+                    <div className="mt-5">
+
+                      <div className="flex flex-col gap-2">
+
+                        {stack.map((technology) => (
+                          <div
+                            key={technology.id}
+                            className="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-3 py-3"
+                          >
+
+                            <div className="flex items-center gap-2">
+
+                              <img
+                                src={technology.icon}
+                                alt={technology.name}
+                                className="h-7 w-7 object-contain"
+                              />
+
+                              <div>
+                                <p className="text-xs font-medium text-slate-700">
+                                  {technology.name}
+                                </p>
+
+                                <p className="text-[9px] text-slate-400">
+                                  {technology.category}
+                                </p>
+                              </div>
+
                             </div>
 
-                            <span className="text-xs font-medium text-slate-700">
-                              {technology}
-                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                removeFromStack(technology.id)
+                              }
+                              className="flex h-6 w-6 items-center justify-center rounded-md text-sm text-slate-400 hover:bg-red-50 hover:text-red-500"
+                            >
+                              ×
+                            </button>
+
                           </div>
+                        ))}
 
+                      </div>
 
-                          <button
-                            type="button"
-                            onClick={() =>
-                              removeFromStack(technology)
-                            }
-                            className="
-                              flex
-                              h-6
-                              w-6
-                              shrink-0
-                              items-center
-                              justify-center
-                              rounded-md
-                              text-sm
-                              text-slate-400
-                              transition
-                              hover:bg-red-50
-                              hover:text-red-500
-                            "
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
+                      <button
+                        type="button"
+                        onClick={removeAll}
+                        className="mt-4 w-full rounded-lg border border-red-100 bg-red-50 py-2 text-xs font-medium text-red-500 hover:bg-red-100"
+                      >
+                        Remove All
+                      </button>
+
                     </div>
+                  )}
 
-                  
+                </aside>
 
-                    <button
-                      type="button"
-                      onClick={removeAll}
-                      className="
-                        mt-4
-                        w-full
-                        rounded-lg
-                        border
-                        border-red-100
-                        bg-red-50
-                        py-2
-                        text-xs
-                        font-medium
-                        text-red-500
-                        transition
-                        hover:border-red-200
-                        hover:bg-red-100
-                        hover:text-red-600
-                      "
-                    >
-                      Remove All
-                    </button>
-                  </div>
-                )}
-              </aside>
-            </div>
+              </div>
+            )}
+
           </div>
         </section>
       </main>
 
-   
       <Footer />
+
+      <ToastContainer position="top-right" />
+
     </div>
   );
 }

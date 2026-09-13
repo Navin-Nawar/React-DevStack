@@ -1,54 +1,56 @@
-import HeroPic from "../photos/banner-stack.png"
+import HeroPic from "../photos/banner-stack.png";
 
 const Hero = () => {
   return (
-    <section className="px-4 py-8 container mx-auto">
+    <section className="container mx-auto px-6 py-12 lg:py-20">
 
-      <div className="mx-auto flex  items-center justify-between  px-8 py-8">
+      <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
 
         <div>
 
-         <h1 className="text-[38px] font-extrabold leading-[1.05] tracking-[-1.5px] text-[#111827]">
-  Build Your Ideal
-  <span className="block">
-    <span className="bg-gradient-to-r from-[#FF5722] to-[#D81B7E] bg-clip-text text-transparent">
-      Development
-    </span>{" "}
-    <span className="bg-gradient-to-r from-[#D81B7E] to-[#7C3AED] bg-clip-text text-transparent">
-      Stack
-    </span>
-  </span>
-</h1>
+          <h1 className="text-4xl font-extrabold leading-tight text-gray-900 lg:text-5xl">
+            Build Your Ideal
 
+            <span className="block bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500 bg-clip-text text-transparent">
+              Development Stack
+            </span>
 
-          <p className="mt-3 max-w-[470px] text-[10px] leading-[1.7] text-gray-500">
+          </h1>
+
+          <p className="mt-4 max-w-xl text-sm leading-6 text-gray-500">
             Explore frontend, backend, database, and tooling options.
             Compare them side by side, and put together the stack that
             fits your next project.
           </p>
 
-          <div className="mt-5 flex items-center gap-2">
+          <div className="mt-6 flex gap-3">
 
             <a
               href="#technologies"
-              className="rounded-sm bg-orange-500 px-3 py-2 text-[8px] font-semibold text-white transition hover:bg-orange-600"
+              className="rounded-md bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500 px-4 py-3 text-xs font-semibold text-white"
             >
               Explore Technologies
             </a>
 
             <a
               href="#about"
-              className="rounded-sm border border-gray-200 bg-white px-4 py-2 text-[8px] font-semibold text-gray-500 transition hover:bg-gray-50"
+              className="rounded-md border border-gray-200 px-4 py-3 text-xs font-semibold text-gray-500"
             >
               Learn More
             </a>
 
           </div>
+
         </div>
 
-        <img src={HeroPic} alt="" />
+        <img
+          src={HeroPic}
+          alt="Development Stack"
+          className="w-full max-w-md"
+        />
 
       </div>
+
     </section>
   );
 };

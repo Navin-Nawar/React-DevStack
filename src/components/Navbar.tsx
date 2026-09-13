@@ -1,82 +1,89 @@
-import Logo from "../photos/logo-text.png"
+import Logo from "../photos/logo-text.png";
+
 const Navbar = () => {
   return (
-  <div className="border-b-2  border-gray-100">
-    <header className="w-full  bg-white container mx-auto">
-      <div className="mx-auto flex items-center justify-between px-6">
+    <header className="sticky top-0 z-50 border-b border-gray-100 bg-white">
 
-        {/* Logo */}
-        <a
-          href="/"
-          className="flex items-center gap-1.5 text-[11px] font-bold text-gray-900"
-        >
-        <img src={Logo} alt="" />
-        </a>
+      <div className="container mx-auto px-6">
 
-        {/* Navigation */}
-        <nav className="hidden items-center gap-6 md:flex">
-          <a
-            href="/"
-            className="text-[8px] font-medium text-pink-500"
-          >
-            Home
+        <div className="flex h-16 items-center justify-between">
+
+          {/* Mobile menu */}
+
+          <button className="text-xl md:hidden">
+            ☰
+          </button>
+
+
+          {/* Logo */}
+
+          <a href="/" className="flex items-center">
+            <img
+              src={Logo}
+              alt="Dev Stack"
+              className="w-24"
+            />
           </a>
 
-          <a
-            href="#technologies"
-            className="text-[8px] font-medium text-gray-500 transition hover:text-pink-500"
-          >
-            Technologies
-          </a>
 
-          <a
-            href="#projects"
-            className="text-[8px] font-medium text-gray-500 transition hover:text-pink-500"
-          >
-            Projects
-          </a>
+          {/* Desktop Navigation */}
 
-          <a
-            href="#about"
-            className="text-[8px] font-medium text-gray-500 transition hover:text-pink-500"
-          >
-            About
-          </a>
+          <nav className="hidden items-center gap-6 md:flex">
 
-          <a
-            href="#contact"
-            className="text-[8px] font-medium text-gray-500 transition hover:text-pink-500"
-          >
-            Contact
-          </a>
-        </nav>
+            <a href="/" className="text-sm text-pink-500">
+              Home
+            </a>
 
-        {/* Right side */}
-        <div className="hidden items-center gap-4 md:flex">
-          <a
-            href="#signin"
-            className="text-[8px] font-medium text-gray-500"
-          >
-            Sign In
-          </a>
+            <a
+              href="#technologies"
+              className="text-sm text-gray-500 hover:text-pink-500"
+            >
+              Technologies
+            </a>
 
-          <a
-            href="#signup"
-            className="rounded-full bg-pink-500 px-3 py-1.5 text-[7px] font-semibold text-white"
-          >
-            Sign Up
-          </a>
+            <a
+              href="#projects"
+              className="text-sm text-gray-500 hover:text-pink-500"
+            >
+              Projects
+            </a>
+
+            <a
+              href="#about"
+              className="text-sm text-gray-500 hover:text-pink-500"
+            >
+              About
+            </a>
+
+            <a
+              href="#contact"
+              className="text-sm text-gray-500 hover:text-pink-500"
+            >
+              Contact
+            </a>
+
+          </nav>
+
+
+          {/* Auth */}
+
+          <div className="flex items-center gap-3">
+
+            <button className="text-sm text-gray-500">
+              Sign In
+            </button>
+
+            <button className="rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500 px-4 py-2 text-xs font-semibold text-white">
+              Sign Up
+            </button>
+
+          </div>
+
         </div>
 
-        {/* Mobile menu */}
-        <button className="text-xl text-gray-800 md:hidden">
-          ☰
-        </button>
-
       </div>
+
     </header>
-    </div>
-    
   );
 };
 
